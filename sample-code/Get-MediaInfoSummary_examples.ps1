@@ -1,6 +1,6 @@
 #==================================================================================================================
 #==================================================================================================================
-# Scratch Testing
+# Sample Code :: Get MediaInfo Summary Information
 #==================================================================================================================
 #==================================================================================================================
 
@@ -8,34 +8,21 @@
 # Initialize Test Environment
 #==================================================================================================================
 
-Clear-Host
+# Load the standard test initialization file.
+. $(Join-Path -Path $PSScriptRoot -ChildPath '_init-test-environment.ps1')
 
-$ErrorActionPreference = "Stop"
-
-$env:PS_STATUSMESSAGE_VERBOSE_MESSAGE_TYPES = '["Process","Information","Debug","FunctionCall","FunctionResult"]'
-$env:PS_STATUSMESSAGE_SHOW_VERBOSE_MESSAGES = $true
-
-Set-Location  -Path $PSScriptRoot
-Push-Location -Path $PSScriptRoot
-
-if (((Get-Location).Path) -match 'PowerShell-[^/\\]*') {
-    $repoName   = $Matches[0]
-    $repoPath   = ((Get-Location).Path -Replace $('{0}.*' -f $repoName),$repoName)
-    $modulePath = Join-Path -Path $repoPath -ChildPath $($repoName.Replace('PowerShell-','po.'))
-}
-else {
-    Write-Host 'Unexpected repo path found. Script execution halted.' -ForegroundColor Red
-    exit
-}
-
-Import-Module $modulePath -Force
+# Override the Default Debug Logging Setting
+#   $env:PS_STATUSMESSAGE_SHOW_VERBOSE_MESSAGES = $true
 
 #==================================================================================================================
-# Testing
+# Run Tests
 #==================================================================================================================
 
-Write-Msg -h -ps -bb -m $( ' Starting Test Run' )
-
-
-
-
+    $testFileName = 'Movies/Abominable (2019) [1080p WS iTunes+ HD DD].m4v'
+    $testFilePath = Join-Path -Path $mediaPath -ChildPath $testFileName
+    $r = Get-MediaInfoSummary -File $($testFilePath)
+    if ( $r.success ) {
+        Write-Msg -a -o $r.value
+    }
+    else { Write-Msg -e -il 2 -m $r.message }
+    

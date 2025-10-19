@@ -1,6 +1,6 @@
 #==================================================================================================================
 #==================================================================================================================
-# po.ModuleName
+# po.MediaInfo
 #==================================================================================================================
 #==================================================================================================================
 
@@ -14,8 +14,11 @@
 
     $ErrorActionPreference = "Stop"
 
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"  -Value $PSScriptRoot
-    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"  -Value $($PSScriptRoot | Split-Path -Leaf)
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_ROOT"      -Value $PSScriptRoot
+    Set-Variable -Scope 'Script' -Name "PS_MODULE_NAME"      -Value $($PSScriptRoot | Split-Path -Leaf)
+
+    Set-Variable -Scope 'Script' -Name "MEDIAINFO_INSTALLED" -Value $false
+    Set-Variable -Scope 'Script' -Name "MEDIAINFO_VERSION"   -Value 'v25.09'
 
     $defaultVerboseTypes = '["Header","Process","Information","Debug","FunctionCall","FunctionResult"]'
 
@@ -41,7 +44,7 @@
     }
 
   # Export all the public functions and aliases (enable for testing only - it affects automatic function discovery)
-    Export-ModuleMember -Function * -Alias *
+    # Export-ModuleMember -Function * -Alias *
 
   # Export the public variables (these must be done here, they don't work when done in the manifest.)
     # Export-ModuleMember -Variable PS_VARIABLE
@@ -49,4 +52,12 @@
   # Load all private functions
     $privateFunctionsRootFolders | ForEach-Object {
         Get-ChildItem -Path "$PS_MODULE_ROOT/$_/*.ps1" -Recurse | ForEach-Object { . $($_.FullName) }
+    }
+
+#==================================================================================================================
+# Validate MediaInfo Binary Initialization
+#==================================================================================================================
+
+    if ( -not $( Test-MediaInfoInstalled ) ) {
+        Show-MissingBinaryMessage
     }
