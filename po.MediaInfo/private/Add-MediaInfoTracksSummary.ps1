@@ -44,6 +44,7 @@ Function Add-MediaInfoTracksSummary {
                               $m.BitRateMode     = $t.OverallBitRate_Mode
                               $m.EncodedBy       = $t.Encoded_Application
                               $m.CodecID         = $t.CodecID
+                              $m.FormatProfile   = $t.format_profile
                               $m.Languages       = @($t.Audio_Language_List -split ' / ' | Sort-Object -Unique)
                               $m.iTunes          = ($null -ne $t.extra.Flavour)
                             }
@@ -62,11 +63,17 @@ Function Add-MediaInfoTracksSummary {
                                     $m.Video.FrameRateMode     = $t.FrameRate_Mode
                                     $m.Video.AspectRatio       = $t.DisplayAspectRatio
                                     $m.Video.AspectRatioString = $t.DisplayAspectRatio_String
-                                    $m.Video.AspectRatioTag    = ($m.Video.AspectRatio -lt 1.5)  ? 'FS' : `
-                                                                (($m.Video.AspectRatio -lt 1.9) ? 'WS' : 'CWS')
                                     $m.Video.EncodedBy         = $t.Encoded_Library_Name
                                     $m.Video.EncodingSettings  = $t.Encoded_Library_Settings
                                     $m.Video.Tuning            = ($m.Video.EncodingSettings -like $tu ? 'animation' : 'film')
+                                    $m.Video.Encoder           = $t.Title
+                                    $m.Video.EncodedDate       = $t.Encoded_Date
+                                    $m.Video.AspectRatioTag    = ($m.Video.AspectRatio -lt 1.5)  ? 'FS' : `
+                                                                 (($m.Video.AspectRatio -lt 1.9) ? 'WS' : 'CWS')
+                                    $m.Video.ProfileTag        = Get-HintedVideoProfile -p $m.Video
+                                    $m.Video.FormatTag         = Get-VideoFormatName -a $([float]$m.Video.AspectRatio) `
+                                                                                     -w $([int]$m.Video.FrameWidth) `
+                                                                                     -h $([int]$m.Video.FrameHeight)
                               }
                             }
                 'audio'     {
@@ -116,6 +123,8 @@ Function Add-MediaInfoTracksSummary {
                             }
             }
         }
+
+        $m.SourceTag = Get-HintedVideoSource -p $m
 
         $m.features = $m.features | Sort-Object -Unique
 
