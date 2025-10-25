@@ -1,4 +1,4 @@
-Function Get-VideoFormatName {
+Function Get-VideoResolutionName {
     <#
     .DESCRIPTION
         Gets the standardized video format name (4k, 1080p, 480p, etc.).
@@ -16,7 +16,7 @@ Function Get-VideoFormatName {
         REQUIRED. Int. Alias: -h. The frame width of the video. Example: 1080
 
     .EXAMPLE
-        Get-VideoFormatName -a 1.33 -w 1440 -h 1080
+        Get-VideoResolutionName -a 1.33 -w 1440 -h 1080
     #>
     [OutputType([String])]
     [CmdletBinding()]

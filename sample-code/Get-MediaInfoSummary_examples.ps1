@@ -28,10 +28,10 @@
         if ( $r.success ) {
             # Write-Msg -a -o $r.value
             Write-Msg -a -ps -m "File: $($_)"
-            Write-Msg -a -m "Resolution: $($r.value.video.FormatTag)"
+            Write-Msg -a -m "Resolution: $($r.value.video.ResolutionTag)"
             Write-Msg -a -m "Aspect: $($r.value.video.AspectRatioTag)"
             Write-Msg -a -m "Source: $($r.value.SourceTag)"
-            Write-Msg -a -m "Profile: $($r.value.video.ProfileTag)"
+            Write-Msg -a -m "Profile: $($r.value.video.FormatTag)"
             Write-Msg -a -m "Audio: $($r.value.audio.FormatTag)"
 
             # Write-Msg -a -m "Settings: $($r.value.video.EncodingSettings)"

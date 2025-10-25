@@ -29,8 +29,8 @@ Function Add-MediaInfoTracksSummary {
 
         $m.DrmProtected = $false
         $m.Features     = [String[]] @()
-        $m.Video        = @{ Encoders = @() }
-        $m.Audio        = @{ Encoders = @() }
+        $m.Video        = @{ }
+        $m.Audio        = @{ }
         $m.Art          = @{ }
         $m.Chapters     = [PSCustomObject[]] @()
 
@@ -70,10 +70,11 @@ Function Add-MediaInfoTracksSummary {
                                     $m.Video.EncodedDate       = $t.Encoded_Date
                                     $m.Video.AspectRatioTag    = ($m.Video.AspectRatio -lt 1.5)  ? 'FS' : `
                                                                  (($m.Video.AspectRatio -lt 1.9) ? 'WS' : 'CWS')
-                                    $m.Video.ProfileTag        = Get-HintedVideoProfile -p $m.Video
-                                    $m.Video.FormatTag         = Get-VideoFormatName -a $([float]$m.Video.AspectRatio) `
-                                                                                     -w $([int]$m.Video.FrameWidth) `
-                                                                                     -h $([int]$m.Video.FrameHeight)
+                                    $m.Video.FormatTag         = Get-HintedVideoProfile -p $m.Video
+                                    $m.Video.ResolutionTag     = Get-VideoResolutionName -a $([float]$m.Video.AspectRatio) `
+                                                                                         -w $([int]$m.Video.FrameWidth) `
+                                                                                         -h $([int]$m.Video.FrameHeight)
+                                    $m.Features               += $m.Video.ResolutionTag
                               }
                             }
                 'audio'     {
