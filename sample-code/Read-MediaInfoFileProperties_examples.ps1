@@ -1,6 +1,6 @@
 #==================================================================================================================
 #==================================================================================================================
-# Sample Code :: Get MediaInfo File Analyzer Data
+# Sample Code :: Get MediaInfo File Properties
 #==================================================================================================================
 #==================================================================================================================
 
@@ -26,8 +26,7 @@
     $testFilePath = Join-Path -Path $mediaPath -ChildPath $testFileName
     $r = Read-MediaInfoFileProperties -File $testFilePath
     if ( $r.success ) {
-        $properties = $r.value
-        $properties
+        $r.value
     }
     else {
         Write-Msg -e -ps -m $r.message
@@ -42,8 +41,7 @@
     $testFilePath = Join-Path -Path $mediaPath -ChildPath $testFileName
     $r = Read-MediaInfoFileProperties -File $testFilePath
     if ( $r.success ) {
-        $properties = $r.value
-        $properties
+        $r.value
     }
     else {
         Write-Msg -e -ps -m $r.message
