@@ -1,24 +1,24 @@
 # PowerShell-MediaInfo
 
-This PowerShell module uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2026 
-[MediaArea.net SARL](info@mediaarea.net).
+This product uses [MediaInfo](https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2026
+[MediaArea.net SARL](mailto:info@mediaarea.net).
 
 [MediaInfo](https://mediaarea.net/en/MediaInfo/Download) is a cross-platform tool used to view or extract the 
 metadata (ID3/iTunes media data, Encoding information, etc.) of audio and video files.
 
-This tool is open-source software [licensed under a BSD-style license)](https://mediaarea.net/en/MediaInfo/License)
-and is available for free on [MediaInfo](https://mediaarea.net/en/MediaInfo/Download). A copy of this the 
-MediaInfo license is included with this module.
+## Licensing
 
-```
-MediaInfo License Disclaimer:
+This module's own code is licensed under the [MIT License](LICENSE).
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-  - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+MediaInfo is open-source software licensed under a [BSD-style license](https://mediaarea.net/en/MediaInfo/License)
+and is available for free from [MediaArea](https://mediaarea.net/en/MediaInfo/Download). This module does
+**not** bundle or redistribute MediaInfo. You install it separately, and the module calls the `mediainfo`
+executable on your PATH. For attribution, the following files are included with this module:
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-```
+- [MEDIAINFO_LICENSE](MEDIAINFO_LICENSE): the full MediaInfo(Lib) license, with its third-party library list and contributors.
+- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): license texts and links for MediaInfo's dependencies (ZenLib, zlib, TinyXML-2, libcurl, libmms, Qt, wxWidgets).
+
+## Installing MediaInfo
 
 On MacOS you can download MediaInfo from the App store, or you can install it using Homebrew with the
 following command:  
