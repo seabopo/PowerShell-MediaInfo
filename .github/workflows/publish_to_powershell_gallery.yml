@@ -25,6 +25,12 @@ jobs:
           }
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
+      - name: Install and import dependencies
+        shell: pwsh
+        run: |
+          Install-PSResource -Name po.Toolkit -Repository PSGallery -Scope CurrentUser -TrustRepository
+          Import-Module -Name po.Toolkit -Force
+          Import-Module -Name ./po.MediaInfo/po.MediaInfo.psd1 -Force
       - name: Publish to PowerShell Gallery
         shell: pwsh
         run: Publish-PSResource -Path ./po.MediaInfo -Repository PSGallery -ApiKey $env:PSGALLERY_API_KEY -Verbose
