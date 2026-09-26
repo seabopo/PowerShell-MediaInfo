@@ -21,5 +21,5 @@ jobs:
       - uses: shogo82148/actions-upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: po.MediaInfo${{ github.event.release.tag_name }}.zip
+          asset_path: po.MediaInfo_${{ github.event.release.tag_name }}.zip
           github_token: ${{ secrets.GITHUB_TOKEN }}
