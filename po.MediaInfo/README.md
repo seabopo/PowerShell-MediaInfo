@@ -31,6 +31,10 @@ Install the [PowerShell-Toolkit](https://github.com/seabopo/PowerShell-Toolkit) 
 Install-PSResource -Name po.Toolkit -Repository PSGallery -Scope CurrentUser
 ```
 
+"Untrusted repository" prompt: PSGallery is untrusted by default. Add -TrustRepository to Install-PSResource to skip it.
+
+Updating later: use Update-PSResource -Name po.MediaInfo.
+
 ## Installing MediaInfo
 
 On MacOS you can download MediaInfo from the App store, or you can install it using Homebrew with the
