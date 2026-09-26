@@ -19,7 +19,7 @@ function Test-MediaInfoInstalled {
 
             Write-Msg -FunctionCall
 
-            $test = Invoke-Cmd -c $( 'MediaInfo -version' ) -r 0 -f -s
+            $test = Invoke-Cmd -c $( 'mediainfo -version' ) -r 0 -f -s
             if ( $test.Success ) {
                 Write-Msg -d -il 1 -m $( 'MediaInfo found. Test successful.' )
                 $Script:MEDIAINFO_INSTALLED = $true

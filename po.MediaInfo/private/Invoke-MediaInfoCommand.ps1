@@ -35,7 +35,7 @@ function Invoke-MediaInfoCommand {
             if ( [String]::IsNullOrEmpty($Command) ) {
                 $Command = '--Full --Output=JSON'
             }
-            $cmd = $( "MediaInfo {0} `"{1}`"" -f $Command, $File )
+            $cmd = $( "mediainfo {0} `"{1}`"" -f $Command, $File )
 
             if ( Test-Path -LiteralPath $File -ErrorAction Ignore ) {
 
