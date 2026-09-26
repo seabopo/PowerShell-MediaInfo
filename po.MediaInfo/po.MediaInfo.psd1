@@ -12,7 +12,7 @@
 RootModule = 'po.MediaInfo.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.4'
+ModuleVersion = '1.0.0'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core', 'Desktop'
@@ -129,4 +129,3 @@ HelpInfoURI = 'https://github.com/seabopo/PowerShell-MediaInfo'
 # DefaultCommandPrefix = ''
 
 }
-
