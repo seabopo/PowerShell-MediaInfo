@@ -61,10 +61,12 @@ Function Add-MediaInfoTracksSummary {
                                     $m.Video.FrameHeight       = $t.Height
                                     $m.Video.FrameRate         = $t.FrameRate
                                     $m.Video.FrameRateMode     = $t.FrameRate_Mode
+                                    $m.Video.FormatSettings    = $t.Format_Settings
                                     $m.Video.AspectRatio       = $t.DisplayAspectRatio
                                     $m.Video.AspectRatioString = $t.DisplayAspectRatio_String
                                     $m.Video.EncodedBy         = $t.Encoded_Library_Name
                                     $m.Video.EncodingSettings  = $t.Encoded_Library_Settings
+                                    $m.Video.HDRFormat         = $t.HDR_Format_Commercial
                                     $m.Video.Tuning            = ($m.Video.EncodingSettings -like $tu ? 'animation' : 'film')
                                     $m.Video.Encoder           = $t.Title
                                     $m.Video.EncodedDate       = $t.Encoded_Date
@@ -75,6 +77,7 @@ Function Add-MediaInfoTracksSummary {
                                                                                          -w $([int]$m.Video.FrameWidth) `
                                                                                          -h $([int]$m.Video.FrameHeight)
                                     $m.Features               += $m.Video.ResolutionTag
+                                    $m.iTunes                  = $m.Video.Encoder -like '*Core Media*' ? $true : $m.iTunes
                               }
                             }
                 'audio'     {
@@ -82,12 +85,15 @@ Function Add-MediaInfoTracksSummary {
                                   $m.Features               += $t.Format_Commercial
                                   $m.Audio.Codec             = $t.codecID
                                   $m.Audio.Format            = $t.Format_String
-                                  $m.Audio.FormatTag         = ($m.Audio.Codec -like '*ac-3*')  ? 'DD'  : `
-                                                               (($m.Audio.Codec -like '*ec-3*') ? 'DD+' : 'DS')
                                   $m.Audio.FormatName        = $t.Format_Commercial
                                   $m.Audio.Channels          = $t.channels
                                   $m.Audio.BitRateString     = $t.BitRate_String
                                   $m.Audio.SampleRateString  = $t.SamplingRate_String
+                                  $m.Audio.Encoder           = $t.Title
+                                  $m.Audio.FormatTag         = ( $m.Audio.Format -like '*JOC*')  ? 'DA'  : `
+                                                               (($m.Audio.Codec  -like '*ac-3*') ? 'DD'  : `
+                                                               (($m.Audio.Codec  -like '*ec-3*') ? 'DD+' : 'DS'))
+                                  $m.iTunes                  = $m.Audio.Encoder -like '*Core Media*' ? $true : $m.iTunes
                                 }
                             }
                 'image'     {

@@ -22,6 +22,20 @@ Function Get-HintedVideoSource {
 
         Write-Msg -FunctionCall -IncludeParameters
 
+        # if (
+        #      $MpegProperties.iTunes               -eq   $false               -and
+        #      $MpegProperties.Audio.Encoder        -like "*Core Media Audio*" -and
+        #      $MpegProperties.Audio.Codec          -eq   'ac-3'               -and 
+        #      $MpegProperties.Video.Encoder        -eq   'Core Media Video'   -and
+        #      ( 
+        #         $MpegProperties.Video.FormatSettings -eq 'CABAC / 5 Ref Frames' -or
+        #         $MpegProperties.Video.FormatSettings -eq 'CABAC / 4 Ref Frames'
+        #      )
+        #     )
+        # {
+        #     $MpegProperties.iTunes = $true
+        # }
+
         $source = $(
             if     ( ($MpegProperties.iTunes) -and ($MpegProperties.DrmProtected) ) { 'IT+' }
             elseif ( ($MpegProperties.iTunes)                                     ) { 'IT'  }
